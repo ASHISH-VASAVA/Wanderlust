@@ -10,8 +10,8 @@ const listingSchema=new Schema({
     },
     description:String,
     image:{
-        file:String,
         url:String,
+        filename:String,
     },
     price:Number,
     location:String,
@@ -22,6 +22,22 @@ const listingSchema=new Schema({
             ref:"Review",
         },
     ],
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:"User",
+    },
+    geometry:{
+        type:{
+            type:String,
+            enum:['Point'],
+            required:true
+        },
+        coordinates:{
+             type:[Number],
+             requires:true
+        },
+    }
+    
 });
 
 listingSchema.post("findOneAndDelete",async(listing)=>{
