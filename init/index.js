@@ -1,28 +1,41 @@
-const mongoose=require("mongoose");
-const initData=require("./data.js");
-const Listing=require("../models/listing.js");
+require("dotenv").config({ path: "../.env" }); // ✅ Important path
+const mongoose = require("mongoose");
+const initData = require("./data.js");
+const Listing = require("../models/listing.js");
 
-const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
+const MONGO_URL = process.env.ATLASDB_URL;
+
+console.log("🌐 Loaded DB URL:", MONGO_URL); // 👀 Confirm it's not undefined
 
 main()
-.then(() =>{
-    console.log("Connected to DB");
-})
-    .catch((err)=>{
-    console.log(err);
-});
+  .then(() => {
+    console.log("✅ Connected to MongoDB Atlas");
+  })
+  .catch((err) => {
+    console.log("❌ MongoDB connection error:", err);
+  });
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
-}   
+  await mongoose.connect(MONGO_URL);
+}
 
 const initDB = async () => {
+  try {
     await Listing.deleteMany({});
-    initData.data = initData.data.map((obj) =>({...obj, owner: "686fb27761a27c6164fdd848",}));
-    await Listing.insertMany(initData.data);
-    console.log("data was initialized");
+    console.log("🗑️ Old listings deleted");
+
+    const newData = initData.data.map((obj) => ({
+      ...obj,
+      owner: "687295db807ed57e4b4cfdd1",
+    }));
+
+    await Listing.insertMany(newData);
+    console.log("✅ Sample listings inserted:", newData.length);
+  } catch (err) {
+    console.error("❌ Error seeding DB:", err);
+  } finally {
+    mongoose.connection.close();
+  }
 };
 
 initDB();
-
-
