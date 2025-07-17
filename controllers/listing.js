@@ -19,7 +19,7 @@ module.exports.showListing=async (req,res) =>{
                populate:{
                 path:"author"},
               })
-           .populate("owner");
+           .populate("owner");  
     if(!listing){
         req.flash("error","Cannot find that listing!");
         return res.redirect("/listings");
@@ -63,19 +63,30 @@ module.exports.renderEditForm=async (req,res) =>{
     res.render("listings/edit.ejs",{listing,originalImageUrl});
 };
 
-module.exports.updateListing=async (req,res) =>{
-    let {id} =req.params;
-    let listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    
-    if(typeof req.file !=="undefined") {
-         let url=req.file.path;
-        let filename=req.file.filename;
-        listing.image={url,filename};
+module.exports.updateListing = async (req, res) => {
+    let { id } = req.params;
+
+    const response = await geocodingClient.forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1
+    }).send();
+
+    let listing = await Listing.findByIdAndUpdate(id, {
+        ...req.body.listing,
+        geometry: response.body.features[0].geometry
+    });
+
+    if (typeof req.file !== "undefined") {
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = { url, filename };
         await listing.save();
     }
-    req.flash("success","Successfully updated the listing!");
+
+    req.flash("success", "Successfully updated the listing!");
     res.redirect(`/listings/${id}`);
 };
+
 
 module.exports.deleteListing=async (req,res) =>{
     let {id} =req.params;
