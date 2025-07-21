@@ -1,16 +1,41 @@
-# 🌍 Wanderlust – Travel Booking Platform
+# 🌍 Wanderlust – A Full-Stack Travel Listing Web App (Inspired by Airbnb)
 
-Wanderlust is a dynamic travel booking web application that allows users to search for destinations, view room listings, apply filters, and read/write reviews — all with a sleek, responsive interface.
+> 🚀 A project I built to dive deep into the world of full-stack web development using Node.js, Express, MongoDB, EJS, and more. This was my first major full-stack app — proudly crafted and deployed with ❤️.
 
-Built using the **MERN stack (MongoDB, Express, React, Node.js)**, this project showcases full-stack development with user authentication, responsive UI, RESTful API integration, and third-party services like Cloudinary.
-
-
+🔗 **Live Demo**: https://wanderlust-ckh2.onrender.com
 
 ## 🚀 Features
 
-- 🔍 **Search Destinations** – Filter by location, price range, and amenities
-- 🏨 **Room Listings** – View detailed accommodation info with photos
-- ✍️ **User Reviews** – Leave and view reviews for each listing
-- 🖼️ **Image Uploads** – Integrated with **Cloudinary** for seamless media uploads
-- 🔐 **User Authentication** – Login & signup functionality
-- 📱 **Responsive Design** – Mobile-first layout using modern CSS
+- 🏕️ Create, edit, and delete travel listings
+- 📸 Upload images from device (stored via Cloudinary)
+- 🌐 Interactive Mapbox integration
+- 🔐 Secure user authentication using Passport.js
+- 📋 Form validation with Joi
+- ⚠️ Flash messaging for alerts and feedback
+- 🧠 Session management & persistent login
+- 📁 Organized folder structure & scalable codebase
+
+
+## 📦 Tech Stack
+
+**Frontend:**
+- HTML, CSS, EJS
+- Bootstrap 5
+
+**Backend:**
+- Node.js
+- Express.js
+- MongoDB (via Mongoose)
+- Passport.js
+
+**Dev Tools & Libraries:**
+- dotenv
+- express-session
+- connect-flash
+- method-override
+- multer + Cloudinary
+- Joi (validation)
+- Mapbox
+
+
+
