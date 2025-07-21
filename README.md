@@ -3,6 +3,7 @@
 > 🚀 A project I built to dive deep into the world of full-stack web development using Node.js, Express, MongoDB, EJS, and more. This was my first major full-stack app — proudly crafted and deployed with ❤️.
 
 🔗 **Live Demo**: https://wanderlust-ckh2.onrender.com
+⚠️ Note: Render might take a few seconds to load due to cold start.
 
 ## 🚀 Features
 
